@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>web push notifications</title>
+</head>
+<body>
+
+<button onclick="subscribe()">Subscribe</button>
+
+
+<script>
+    addEventListener('load', async () => {
+        let sw = await navigator.serviceWorker.register('./sw.js')
+        console.log(sw)
+    });
+
+    async function subscribe() {
+        let sw = await navigator.serviceWorker.ready;
+        let push = await  sw.pushManager.subscribe({
+            userVisibleOnly:true,
+            //put here public key
+            applicationServerKey : 'BALCwqrjR2x6rvBkPgjrkc6LGGmOCwQlv8bZmpLSf5GcnMb4xBZ0Jbwdr3ufPU8tfY4XU7i0vG_Eru9NN_H8J-8',
+        })
+
+        console.log(JSON.stringify(push))
+    }
+</script>
+
+</body>
+</html>
